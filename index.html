@@ -9,29 +9,24 @@
 <body>
     <div class="container">
         <h1>利益計算ツール</h1>
-        <p>計算したい卸価格、手数料率、および送料を入力してください。</p>
+        <label for="wholesalePrice">卸価格 (円)</label>
+        <input type="number" id="wholesalePrice" placeholder="卸価格を入力" />
 
-        <form>
-            <label for="wholesalePrice">卸価格 (円)</label>
-            <input type="number" id="wholesalePrice" placeholder="卸価格を入力" disabled />
+        <label for="feePercentage">手数料 (%)</label>
+        <input type="number" id="feePercentage" placeholder="手数料率を入力" />
 
-            <label for="feePercentage">手数料 (%)</label>
-            <input type="number" id="feePercentage" placeholder="手数料率を入力" disabled />
+        <label for="shippingCost">送料 (円)</label>
+        <input type="number" id="shippingCost" placeholder="送料を入力" />
 
-            <label for="shippingCost">送料 (円)</label>
-            <input type="number" id="shippingCost" placeholder="送料を入力" disabled />
-        </form>
+        <button onclick="calculate()">計算する</button>
 
-        <div class="info">
-            <h2>計算方法</h2>
-            <p>計算方法の例：</p>
-            <p>最初に、手数料を計算します：</p>
-            <p><code>手数料 = 卸価格 × 手数料率</code></p>
-            <p>次に、利益前の販売価格を求めます：</p>
-            <p><code>販売価格 = 卸価格 - 手数料 - 送料</code></p>
-            <p>最終的に、30%の利益を加えた目標価格を計算します：</p>
-            <p><code>最終価格 = 利益前の販売価格 × 1.3</code></p>
+        <div id="result">
+            <h2>計算結果</h2>
+            <p id="formula"></p>
+            <p id="finalPrice"></p>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
