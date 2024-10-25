@@ -3,54 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>計算ツール</title>
-    <style>
-        /* 簡単なスタイル */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-    </style>
+    <title>販売価格計算ツール</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <h1>販売価格計算ツール</h1>
+        <form id="calcForm">
+            <label for="wholesalePrice">卸価格 (円):</label>
+            <input type="number" id="wholesalePrice" placeholder="卸価格を入力" required>
+            
+            <label for="shippingFee">送料 (円):</label>
+            <input type="number" id="shippingFee" placeholder="送料を入力" required>
 
-<h1>売上金額計算ツール</h1>
-<label for="wholesalePrice">卸価格:</label>
-<input type="number" id="wholesalePrice" placeholder="例: 1000">
+            <button type="button" onclick="calculateSellingPrice()">計算する</button>
+        </form>
 
-<label for="feeRate">手数料率（%）:</label>
-<input type="number" id="feeRate" placeholder="例: 10">
+        <div id="result">
+            <h2>必要な販売価格:</h2>
+            <p id="sellingPrice">- 円</p>
+        </div>
+    </div>
 
-<label for="shipping">送料:</label>
-<input type="number" id="shipping" placeholder="例: 300">
+    <script>
+        function calculateSellingPrice() {
+            const wholesalePrice = parseFloat(document.getElementById("wholesalePrice").value);
+            const shippingFee = parseFloat(document.getElementById("shippingFee").value);
+            const feeRate = 0.1; // メルカリの手数料率10%
 
-<button onclick="calculate()">計算する</button>
+            const targetAmount = wholesalePrice * 1.3; // 卸価格の130%
+            const requiredSellingPrice = (targetAmount + shippingFee) / (1 - feeRate);
 
-<h2 id="result"></h2>
-
-<script>
-function calculate() {
-    const wholesalePrice = parseFloat(document.getElementById('wholesalePrice').value);
-    const feeRate = parseFloat(document.getElementById('feeRate').value) / 100;
-    const shipping = parseFloat(document.getElementById('shipping').value);
-
-    // 目標売上金額
-    const targetSalesAmount = wholesalePrice * 1.3;
-
-    // 手数料の計算
-    const fee = wholesalePrice * feeRate;
-
-    // 売上金額の計算
-    const salesAmount = wholesalePrice - (fee + shipping);
-
-    // 結果の表示
-    document.getElementById('result').innerText = `目標売上金額: ${targetSalesAmount.toFixed(2)}円\n実際の売上金額: ${salesAmount.toFixed(2)}円`;
-}
-</script>
-
+            document.getElementById("sellingPrice").textContent = requiredSellingPrice.toFixed(2) + " 円";
+        }
+    </script>
 </body>
 </html>
