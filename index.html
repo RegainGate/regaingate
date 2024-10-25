@@ -31,6 +31,12 @@
         <div id="result">
             <h2>必要な販売価格:</h2>
             <p id="sellingPrice">- 円</p>
+            <div id="calculationSteps">
+                <h3>計算ステップ:</h3>
+                <p id="targetAmountStep">-</p>
+                <p id="feeAmountStep">-</p>
+                <p id="finalCalculationStep">-</p>
+            </div>
         </div>
     </div>
 
@@ -42,12 +48,15 @@
 
             // 卸価格の130%を計算
             const targetAmount = wholesalePrice * 1.3;
+            document.getElementById("targetAmountStep").textContent = `卸価格の130%: ${targetAmount.toFixed(2)} 円`;
 
             // 手数料をパーセンテージから計算
             const feeAmount = (feePercentage / 100) * wholesalePrice;
+            document.getElementById("feeAmountStep").textContent = `手数料 (${feePercentage}%): ${feeAmount.toFixed(2)} 円`;
 
             // 必要な販売価格の計算
             const requiredSellingPrice = targetAmount + feeAmount + shippingFee;
+            document.getElementById("finalCalculationStep").textContent = `販売価格 = ${targetAmount.toFixed(2)} + ${feeAmount.toFixed(2)} + ${shippingFee.toFixed(2)} = ${requiredSellingPrice.toFixed(2)} 円`;
 
             document.getElementById("sellingPrice").textContent = requiredSellingPrice.toFixed(2) + " 円";
         }
