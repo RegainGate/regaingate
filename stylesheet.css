@@ -1,61 +1,43 @@
-/* 全体のスタイル */
 body {
     font-family: Arial, sans-serif;
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    background-color: #f9f9f9;
+    margin: 20px;
+    background-color: #f8f9fa; /* 背景色 */
 }
 
-/* 見出しのスタイル */
 h1 {
-    text-align: center;
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 20px;
+    color: #343a40; /* タイトルの色 */
 }
 
-/* ラベルと入力ボックスのスタイル */
 label {
-    font-weight: bold;
-    margin-top: 10px;
-    color: #555;
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold; /* ラベルの太字 */
 }
 
 input[type="number"] {
-    width: calc(100% - 20px); /* 余白を考慮して幅を調整 */
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
+    width: 100%; /* 幅を100%に設定 */
+    padding: 8px; /* パディングを追加 */
+    margin-bottom: 15px; /* 下部マージンを追加 */
+    border: 1px solid #ced4da; /* ボーダーのスタイル */
+    border-radius: 4px; /* 角を丸く */
 }
 
-/* ボタンのスタイル */
 button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 15px;
-    background-color: #4CAF50;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    background-color: #007bff; /* ボタンの背景色 */
+    color: white; /* ボタンのテキスト色 */
+    padding: 10px 15px; /* ボタンのパディング */
+    border: none; /* ボタンのボーダーなし */
+    border-radius: 4px; /* 角を丸く */
+    cursor: pointer; /* マウスカーソルをポインターに */
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #0056b3; /* ホバー時の色 */
 }
 
-/* 結果表示部分のスタイル */
-.result {
-    margin-top: 20px;
-    font-weight: bold;
-    color: #333;
-    background-color: #eef;
+#results {
+    margin-top: 20px; /* 結果表示のマージン */
     padding: 10px;
-    border-radius: 4px;
+    background-color: #e9ecef; /* 結果表示の背景色 */
+    border-radius: 4px; /* 角を丸く */
 }
