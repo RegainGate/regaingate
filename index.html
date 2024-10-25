@@ -31,7 +31,10 @@
             const shippingFee = parseFloat(document.getElementById("shippingFee").value);
             const feeRate = 0.1; // メルカリの手数料率10%
 
-            const targetAmount = wholesalePrice * 1.3; // 卸価格の130%
+            // 目標金額：卸価格 + 30%
+            const targetAmount = wholesalePrice * 1.3;
+
+            // 手数料を考慮した販売価格の計算
             const requiredSellingPrice = (targetAmount + shippingFee) / (1 - feeRate);
 
             document.getElementById("sellingPrice").textContent = requiredSellingPrice.toFixed(2) + " 円";
