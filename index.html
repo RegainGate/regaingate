@@ -3,63 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>販売価格計算ツール</title>
+    <title>利益計算ツール</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>販売価格計算ツール</h1>
-        <form id="calcForm">
-            <div class="form-group">
-                <label for="wholesalePrice">卸価格 (円):</label>
-                <input type="number" id="wholesalePrice" placeholder="卸価格を入力" required>
-            </div>
+        <h1>利益計算ツール</h1>
+        <p>計算したい卸価格、手数料率、および送料を入力してください。</p>
 
-            <div class="form-group">
-                <label for="fee">手数料 (%):</label>
-                <input type="number" id="fee" placeholder="手数料を入力" required>
-            </div>
+        <form>
+            <label for="wholesalePrice">卸価格 (円)</label>
+            <input type="number" id="wholesalePrice" placeholder="卸価格を入力" disabled />
 
-            <div class="form-group">
-                <label for="shippingFee">送料 (円):</label>
-                <input type="number" id="shippingFee" placeholder="送料を入力" required>
-            </div>
+            <label for="feePercentage">手数料 (%)</label>
+            <input type="number" id="feePercentage" placeholder="手数料率を入力" disabled />
 
-            <button type="button" onclick="calculateSellingPrice()">計算する</button>
+            <label for="shippingCost">送料 (円)</label>
+            <input type="number" id="shippingCost" placeholder="送料を入力" disabled />
         </form>
 
-        <div id="result">
-            <h2>必要な販売価格:</h2>
-            <p id="sellingPrice">- 円</p>
-            <div id="calculationSteps">
-                <h3>計算ステップ:</h3>
-                <p id="targetAmountStep">-</p>
-                <p id="feeAmountStep">-</p>
-                <p id="finalCalculationStep">-</p>
-            </div>
+        <div class="info">
+            <h2>計算方法</h2>
+            <p>計算方法の例：</p>
+            <p>最初に、手数料を計算します：</p>
+            <p><code>手数料 = 卸価格 × 手数料率</code></p>
+            <p>次に、利益前の販売価格を求めます：</p>
+            <p><code>販売価格 = 卸価格 - 手数料 - 送料</code></p>
+            <p>最終的に、30%の利益を加えた目標価格を計算します：</p>
+            <p><code>最終価格 = 利益前の販売価格 × 1.3</code></p>
         </div>
     </div>
-
-    <script>
-        function calculateSellingPrice() {
-            const wholesalePrice = parseFloat(document.getElementById("wholesalePrice").value);
-            const feePercentage = parseFloat(document.getElementById("fee").value);
-            const shippingFee = parseFloat(document.getElementById("shippingFee").value);
-
-            // 卸価格の130%を計算
-            const targetAmount = wholesalePrice * 1.3;
-            document.getElementById("targetAmountStep").textContent = `卸価格の130%: ${targetAmount.toFixed(2)} 円`;
-
-            // 手数料をパーセンテージから計算
-            const feeAmount = (feePercentage / 100) * wholesalePrice;
-            document.getElementById("feeAmountStep").textContent = `手数料 (${feePercentage}%): ${feeAmount.toFixed(2)} 円`;
-
-            // 必要な販売価格の計算
-            const requiredSellingPrice = targetAmount + feeAmount + shippingFee;
-            document.getElementById("finalCalculationStep").textContent = `販売価格 = ${targetAmount.toFixed(2)} + ${feeAmount.toFixed(2)} + ${shippingFee.toFixed(2)} = ${requiredSellingPrice.toFixed(2)} 円`;
-
-            document.getElementById("sellingPrice").textContent = requiredSellingPrice.toFixed(2) + " 円";
-        }
-    </script>
 </body>
 </html>
