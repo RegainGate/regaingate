@@ -16,8 +16,8 @@
             </div>
 
             <div class="form-group">
-                <label for="fee">手数料 (%):</label>
-                <input type="number" id="fee" placeholder="手数料を入力" min="0" max="100" required>
+                <label for="fee">手数料 (円):</label>
+                <input type="number" id="fee" placeholder="手数料を入力" required>
             </div>
 
             <div class="form-group">
@@ -37,23 +37,14 @@
     <script>
         function calculateSellingPrice() {
             const wholesalePrice = parseFloat(document.getElementById("wholesalePrice").value);
-            const feePercent = parseFloat(document.getElementById("fee").value);
+            const fee = parseFloat(document.getElementById("fee").value);
             const shippingFee = parseFloat(document.getElementById("shippingFee").value);
-
-            // 入力値の検証
-            if (isNaN(wholesalePrice) || isNaN(feePercent) || isNaN(shippingFee)) {
-                document.getElementById("sellingPrice").textContent = "すべてのフィールドに有効な値を入力してください。";
-                return;
-            }
-
-            // 手数料を計算
-            const feeAmount = (wholesalePrice * feePercent) / 100;
 
             // 卸価格の130%を計算
             const targetAmount = wholesalePrice * 1.3;
 
             // 必要な販売価格の計算
-            const requiredSellingPrice = targetAmount + feeAmount + shippingFee;
+            const requiredSellingPrice = targetAmount + fee + shippingFee;
 
             document.getElementById("sellingPrice").textContent = requiredSellingPrice.toFixed(2) + " 円";
         }
