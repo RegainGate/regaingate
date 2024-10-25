@@ -16,7 +16,7 @@
             </div>
 
             <div class="form-group">
-                <label for="fee">手数料 (円):</label>
+                <label for="fee">手数料 (%):</label>
                 <input type="number" id="fee" placeholder="手数料を入力" required>
             </div>
 
@@ -37,14 +37,17 @@
     <script>
         function calculateSellingPrice() {
             const wholesalePrice = parseFloat(document.getElementById("wholesalePrice").value);
-            const fee = parseFloat(document.getElementById("fee").value);
+            const feePercent = parseFloat(document.getElementById("fee").value);
             const shippingFee = parseFloat(document.getElementById("shippingFee").value);
+
+            // 手数料を計算
+            const feeAmount = (wholesalePrice * feePercent) / 100;
 
             // 卸価格の130%を計算
             const targetAmount = wholesalePrice * 1.3;
 
             // 必要な販売価格の計算
-            const requiredSellingPrice = targetAmount + fee + shippingFee;
+            const requiredSellingPrice = targetAmount + feeAmount + shippingFee;
 
             document.getElementById("sellingPrice").textContent = requiredSellingPrice.toFixed(2) + " 円";
         }
