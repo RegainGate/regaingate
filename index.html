@@ -13,8 +13,8 @@
             <label for="wholesalePrice">卸価格 (円):</label>
             <input type="number" id="wholesalePrice" placeholder="卸価格を入力" required>
             
-            <label for="feeRate">手数料率 (%):</label>
-            <input type="number" id="feeRate" placeholder="手数料率を入力" value="10" required>
+            <label for="fee">手数料 (円):</label>
+            <input type="number" id="fee" placeholder="手数料を入力" required>
 
             <label for="shippingFee">送料 (円):</label>
             <input type="number" id="shippingFee" placeholder="送料を入力" required>
@@ -31,14 +31,14 @@
     <script>
         function calculateSellingPrice() {
             const wholesalePrice = parseFloat(document.getElementById("wholesalePrice").value);
-            const feeRate = parseFloat(document.getElementById("feeRate").value) / 100;
+            const fee = parseFloat(document.getElementById("fee").value);
             const shippingFee = parseFloat(document.getElementById("shippingFee").value);
 
-            // 目標金額：卸価格の130%（卸価格 + 30%）
+            // 卸価格の130%を計算
             const targetAmount = wholesalePrice * 1.3;
 
             // 必要な販売価格の計算
-            const requiredSellingPrice = (targetAmount + shippingFee) / (1 - feeRate);
+            const requiredSellingPrice = targetAmount + fee + shippingFee;
 
             document.getElementById("sellingPrice").textContent = requiredSellingPrice.toFixed(2) + " 円";
         }
