@@ -10,14 +10,20 @@
     <div class="container">
         <h1>販売価格計算ツール</h1>
         <form id="calcForm">
-            <label for="wholesalePrice">卸価格 (円):</label>
-            <input type="number" id="wholesalePrice" placeholder="卸価格を入力" required>
+            <div class="form-group">
+                <label for="wholesalePrice">卸価格 (円):</label>
+                <input type="number" id="wholesalePrice" placeholder="卸価格を入力" required>
+            </div>
 
-            <label for="fee">手数料 (円):</label>
-            <input type="number" id="fee" placeholder="手数料を入力" required>
+            <div class="form-group">
+                <label for="fee">手数料 (円):</label>
+                <input type="number" id="fee" placeholder="手数料を入力" required>
+            </div>
 
-            <label for="shippingFee">送料 (円):</label>
-            <input type="number" id="shippingFee" placeholder="送料を入力" required>
+            <div class="form-group">
+                <label for="shippingFee">送料 (円):</label>
+                <input type="number" id="shippingFee" placeholder="送料を入力" required>
+            </div>
 
             <button type="button" onclick="calculateSellingPrice()">計算する</button>
         </form>
