@@ -3,119 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>価格計算ツール</title>
+    <title>販売価格計算ツール</title>
     <style>
-        /* 全体のスタイル */
         body {
             font-family: Arial, sans-serif;
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            background-color: #f9f9f9;
+            margin: 20px;
         }
-
-        /* 見出しのスタイル */
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        /* ラベルと入力ボックスのスタイル */
         label {
-            font-weight: bold;
-            margin-top: 10px;
-            color: #555;
-        }
-
-        input[type="number"] {
-            width: calc(100% - 20px); /* 余白を考慮して幅を調整 */
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        /* ボタンのスタイル */
-        button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 15px;
-            background-color: #4CAF50;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        /* 結果表示部分のスタイル */
-        .result {
-            margin-top: 20px;
-            font-weight: bold;
-            color: #333;
-            background-color: #eef;
-            padding: 10px;
-            border-radius: 4px;
+            display: block;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-
-    <h1>価格計算ツール</h1>
-    
-    <label for="wholesalePrice">卸価格:</label>
-    <input type="number" id="wholesalePrice" placeholder="卸価格を入力" required>
-
-    <label for="feePercentage">手数料（%）:</label>
-    <input type="number" id="feePercentage" placeholder="手数料（%）を入力" required>
-
-    <label for="shippingCost">送料:</label>
-    <input type="number" id="shippingCost" placeholder="送料を入力" required>
-
+    <h1>販売価格計算ツール</h1>
+    <label>
+        卸価格:
+        <input type="number" id="wholesalePrice" placeholder="卸価格" />
+    </label>
+    <label>
+        手数料 (%):
+        <input type="number" id="fee" placeholder="手数料" />
+    </label>
+    <label>
+        送料:
+        <input type="number" id="shippingCost" placeholder="送料" />
+    </label>
     <button onclick="calculatePrice()">計算する</button>
 
-    <div class="result" id="result"></div>
-    <div class="result" id="calculationSteps"></div>
+    <h2>結果</h2>
+    <p id="results"></p>
 
     <script>
         function calculatePrice() {
-            // 各入力値を取得し、数値に変換する
             const wholesalePrice = parseFloat(document.getElementById("wholesalePrice").value);
-            const feePercentage = parseFloat(document.getElementById("feePercentage").value);
+            const feePercentage = parseFloat(document.getElementById("fee").value) / 100;
             const shippingCost = parseFloat(document.getElementById("shippingCost").value);
 
-            // 入力値が数値であることを確認
             if (isNaN(wholesalePrice) || isNaN(feePercentage) || isNaN(shippingCost)) {
-                document.getElementById("result").innerText = "すべての項目を正しく入力してください。";
+                document.getElementById("results").innerHTML = "すべてのフィールドに正しい値を入力してください。";
                 return;
             }
 
-            // 手数料の金額
-            const feeAmount = wholesalePrice * (feePercentage / 100);
+            // 手数料を計算
+            const feeAmount = wholesalePrice * feePercentage;
+            const totalCost = wholesalePrice - feeAmount + shippingCost;
 
-            // 手数料と送料を引いた合計
-            const totalAfterFees = wholesalePrice - feeAmount + shippingCost;
+            // 30%の利益を加えた最終販売価格を計算
+            const targetPrice = totalCost * 1.3;
 
-            // 最終的な販売価格（卸価格の30%利益を確保する価格）
-            const targetPrice = Math.floor(wholesalePrice * 1.3);
+            // 小数点以下切り捨て
+            const finalPrice = Math.floor(targetPrice);
 
-            // 途中経過の計算を表示
-            document.getElementById("calculationSteps").innerHTML = `
-                <p>手数料額 (${feePercentage}%): ${feeAmount.toFixed(2)}円</p>
-                <p>手数料と送料を引いた後の合計: ${totalAfterFees.toFixed(2)}円</p>
+            // 結果を表示
+            document.getElementById("results").innerHTML = `
+                卸価格: ${wholesalePrice}円<br>
+                手数料: ${feeAmount.toFixed(2)}円<br>
+                送料: ${shippingCost}円<br>
+                販売価格 (30%の利益を加えた後): ${finalPrice}円
             `;
-
-            // 最終販売価格を表示
-            document.getElementById("result").innerText = `最終販売価格 (30%の利益): ${targetPrice}円`;
         }
     </script>
-
 </body>
 </html>
