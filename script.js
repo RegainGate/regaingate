@@ -1,50 +1,18 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-}
+document.getElementById("calculateBtn").addEventListener("click", function() {
+    const wholesalePrice = parseFloat(document.getElementById("wholesalePrice").value);
+    const feePercentage = parseFloat(document.getElementById("feePercentage").value);
+    const shippingCost = parseFloat(document.getElementById("shippingCost").value);
 
-.container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+    // 手数料計算
+    const fee = (feePercentage / 100) * wholesalePrice;
+    // 手数料と送料を引いた価格
+    const netPrice = wholesalePrice - fee - shippingCost;
+    // 30%の利益を考慮した最終価格
+    const finalPrice = Math.floor(netPrice * 1.3); // 小数点以下切り捨て
 
-h1 {
-    text-align: center;
-}
-
-label {
-    display: block;
-    margin: 10px 0 5px;
-}
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #218838;
-}
-
-#results {
-    margin-top: 20px;
-}
+    document.getElementById("result").innerHTML = `
+        <p>手数料: ¥${Math.floor(fee)}</p>
+        <p>手数料と送料を引いた価格: ¥${Math.floor(netPrice)}</p>
+        <p>30%の利益を考慮した最終価格: ¥${finalPrice}</p>
+    `;
+});
