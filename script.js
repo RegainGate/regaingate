@@ -4,20 +4,24 @@ document.getElementById("calculateButton").addEventListener("click", function() 
     const feePercentage = Math.floor(parseFloat(document.getElementById("fee").value) || 0);
     const shippingFee = Math.floor(parseFloat(document.getElementById("shippingFee").value) || 0);
 
-    // 卸価格の130%を計算
-    const targetAmount = Math.floor(wholesalePrice * 1.3);
+    // 売上総利益を計算
+    const grossProfit = Math.floor(wholesalePrice * 1.3);
+
+    // 売上総利益と送料の合計を計算
+    const totalWithShipping = grossProfit + shippingFee;
 
     // 手数料をパーセンテージから計算
-    const feeAmount = Math.floor((feePercentage / 100) * wholesalePrice);
+    const feeAmount = Math.floor((feePercentage / 100) * totalWithShipping);
 
     // 必要な販売価格の計算
-    const requiredSellingPrice = targetAmount + feeAmount + shippingFee;
+    const requiredSellingPrice = totalWithShipping + feeAmount;
 
     // 結果を表示
     document.getElementById("sellingPrice").textContent = requiredSellingPrice + " 円";
 
     // 途中経過を表示
-    document.getElementById("targetAmount").textContent = `卸価格の130%: ${targetAmount} 円`;
+    document.getElementById("grossProfit").textContent = `売上総利益 (卸価格 × 1.3): ${grossProfit} 円`;
+    document.getElementById("totalWithShipping").textContent = `売上総利益 ＋ 送料: ${totalWithShipping} 円`;
     document.getElementById("feeAmount").textContent = `手数料: ${feeAmount} 円`;
-    document.getElementById("totalAmount").textContent = `必要な販売価格: ${requiredSellingPrice} 円`;
+    document.getElementById("requiredSellingPrice").textContent = `必要な販売価格: ${requiredSellingPrice} 円`;
 });
