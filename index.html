@@ -25,22 +25,32 @@
                 <input type="number" id="shippingFee" placeholder="送料を入力" required>
             </div>
 
-            <button type="button" id="calculateButton">計算する</button>
+            <button type="button" onclick="calculateSellingPrice()">計算する</button>
         </form>
 
         <div id="result">
             <h2>必要な販売価格:</h2>
             <p id="sellingPrice">- 円</p>
         </div>
-
-        <div id="calculations">
-            <h3>途中経過の計算式:</h3>
-            <p id="targetAmount">卸価格の130%: - 円</p>
-            <p id="feeAmount">手数料: - 円</p>
-            <p id="totalAmount">必要な販売価格: - 円</p>
-        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        function calculateSellingPrice() {
+            const wholesalePrice = parseFloat(document.getElementById("wholesalePrice").value);
+            const feePercentage = parseFloat(document.getElementById("fee").value);
+            const shippingFee = parseFloat(document.getElementById("shippingFee").value);
+
+            // 卸価格の130%を計算
+            const targetAmount = wholesalePrice * 1.3;
+
+            // 手数料をパーセンテージから計算
+            const feeAmount = (feePercentage / 100) * wholesalePrice;
+
+            // 必要な販売価格の計算
+            const requiredSellingPrice = targetAmount + feeAmount + shippingFee;
+
+            document.getElementById("sellingPrice").textContent = requiredSellingPrice.toFixed(2) + " 円";
+        }
+    </script>
 </body>
 </html>
