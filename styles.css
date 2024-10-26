@@ -68,7 +68,7 @@ button:hover {
     margin-bottom: 10px;
 }
 
-#sellingPrice, #targetAmount, #feeAmount, #totalAmount {
+#sellingPrice, #grossProfit, #totalWithShipping, #feeAmount, #requiredSellingPrice {
     font-size: 18px;
     color: #333;
     text-align: left;
