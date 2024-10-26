@@ -10,8 +10,8 @@ document.getElementById("calculateButton").addEventListener("click", function() 
     // 売上総利益と送料の合計を計算
     const totalWithShipping = grossProfit + shippingFee;
 
-    // 手数料をパーセンテージから計算
-    const feeAmount = Math.floor((feePercentage / 100) * totalWithShipping);
+    // 手数料を卸価格から計算
+    const feeAmount = Math.floor((feePercentage / 100) * wholesalePrice);
 
     // 必要な販売価格の計算
     const requiredSellingPrice = totalWithShipping + feeAmount;
