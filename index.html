@@ -3,31 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>利益計算ツール</title>
+    <title>価格計算ツール</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>利益計算ツール</h1>
-        <label for="wholesalePrice">卸価格:</label>
-        <input type="number" id="wholesalePrice" placeholder="例: 1000">
-
-        <label for="feePercentage">手数料（％）:</label>
-        <input type="number" id="feePercentage" placeholder="例: 5">
-
-        <label for="shippingCost">送料:</label>
-        <input type="number" id="shippingCost" placeholder="例: 200">
-
-        <button id="calculateButton">計算する</button>
-
-        <div id="results">
-            <h2>結果:</h2>
-            <p id="feeAmount"></p>
-            <p id="netPrice"></p>
-            <p id="targetPrice"></p>
-            <p id="finalPrice"></p>
+        <h1>価格計算ツール</h1>
+        <div>
+            <label for="wholesalePrice">卸価格:</label>
+            <input type="number" id="wholesalePrice" placeholder="卸価格を入力">
         </div>
+        <div>
+            <label for="feePercentage">手数料（%）:</label>
+            <input type="number" id="feePercentage" placeholder="手数料を入力">
+        </div>
+        <div>
+            <label for="shippingCost">送料:</label>
+            <input type="number" id="shippingCost" placeholder="送料を入力">
+        </div>
+        <button id="calculateBtn">計算する</button>
+
+        <h2>計算結果</h2>
+        <div id="result"></div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
