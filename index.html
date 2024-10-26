@@ -3,25 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>販売価格計算ツール</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <h1>販売価格計算ツール</h1>
-        <label for="wholesalePrice">卸価格:</label>
-        <input type="number" id="wholesalePrice" placeholder="卸価格を入力" required>
+        <label for="wholesalePrice">卸価格（円）:</label>
+        <input type="number" id="wholesalePrice" placeholder="例: 5000" required>
 
-        <label for="feePercentage">手数料 (%):</label>
-        <input type="number" id="feePercentage" placeholder="手数料を入力" required>
+        <label for="feePercentage">手数料（%）:</label>
+        <input type="number" id="feePercentage" placeholder="例: 10" required>
 
-        <label for="shippingCost">送料:</label>
-        <input type="number" id="shippingCost" placeholder="送料を入力" required>
+        <label for="shippingCost">送料（円）:</label>
+        <input type="number" id="shippingCost" placeholder="例: 750" required>
 
         <button id="calculateButton">計算する</button>
 
-        <div id="results"></div>
+        <h2>結果</h2>
+        <div id="result"></div>
+        <div id="calculationDetails"></div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
