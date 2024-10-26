@@ -1,22 +1,22 @@
-document.getElementById('calculateButton').addEventListener('click', function() {
-    const wholesalePrice = parseFloat(document.getElementById('wholesalePrice').value);
-    const feePercentage = parseFloat(document.getElementById('feePercentage').value) / 100;
-    const shippingCost = parseFloat(document.getElementById('shippingCost').value);
+function calculateSellingPrice() {
+    const wholesalePrice = parseFloat(document.getElementById("wholesalePrice").value);
+    const feePercentage = parseFloat(document.getElementById("fee").value);
+    const shippingFee = parseFloat(document.getElementById("shippingFee").value);
 
-    const profitTarget = wholesalePrice * 0.30; // 30%の利益
-    const targetSales = wholesalePrice + profitTarget; // 6500円
-    const netSales = targetSales - shippingCost; // 送料を引いた後の売上
+    // 卸価格の130%を計算
+    const targetAmount = wholesalePrice * 1.3;
 
-    // 手数料を考慮した販売価格の計算
-    const sellingPrice = Math.floor(netSales / (1 - feePercentage)); // 小数点以下切り捨て
+    // 手数料をパーセンテージから計算
+    const feeAmount = (feePercentage / 100) * wholesalePrice;
+
+    // 必要な販売価格の計算
+    const requiredSellingPrice = targetAmount + feeAmount + shippingFee;
 
     // 結果を表示
-    document.getElementById('result').textContent = `販売価格: ${sellingPrice}円`;
-    document.getElementById('calculationDetails').innerHTML = `
-        <strong>計算過程:</strong><br>
-        30%の利益: ${profitTarget.toFixed(0)}円<br>
-        目標売上: ${targetSales.toFixed(0)}円<br>
-        送料を引いた後の売上: ${netSales.toFixed(0)}円<br>
-        必要な販売価格: ${sellingPrice}円
-    `;
-});
+    document.getElementById("sellingPrice").textContent = requiredSellingPrice.toFixed(2) + " 円";
+
+    // 途中経過を表示
+    document.getElementById("targetAmount").textContent = `卸価格の130%: ${targetAmount.toFixed(2)} 円`;
+    document.getElementById("feeAmount").textContent = `手数料: ${feeAmount.toFixed(2)} 円`;
+    document.getElementById("totalAmount").textContent = `必要な販売価格: ${requiredSellingPrice.toFixed(2)} 円`;
+}
