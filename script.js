@@ -1,22 +1,50 @@
-document.getElementById("calculateButton").addEventListener("click", function() {
-    // 入力値を取得
-    const wholesalePrice = parseFloat(document.getElementById("wholesalePrice").value);
-    const feePercentage = parseFloat(document.getElementById("feePercentage").value);
-    const shippingCost = parseFloat(document.getElementById("shippingCost").value);
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
 
-    // 1. 手数料を計算
-    const feeAmount = wholesalePrice * (feePercentage / 100);
-    document.getElementById("feeAmount").innerText = `手数料額: ${feeAmount.toFixed(2)}`;
+.container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-    // 2. 手数料と送料を引いた後の価格を計算
-    const netPrice = wholesalePrice - feeAmount - shippingCost;
-    document.getElementById("netPrice").innerText = `手数料と送料を引いた後の価格: ${netPrice.toFixed(2)}`;
+h1 {
+    text-align: center;
+}
 
-    // 3. 30%の利益を出すための販売価格を計算
-    const targetPrice = netPrice / 0.7;
-    document.getElementById("targetPrice").innerText = `利益30％の目標価格（小数点以下切り捨て前）: ${targetPrice.toFixed(2)}`;
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
 
-    // 4. 小数点以下を切り捨てる
-    const finalPrice = Math.floor(targetPrice);
-    document.getElementById("finalPrice").innerText = `30％の利益が出る販売価格（小数点以下切り捨て後）: ${finalPrice}`;
-});
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #218838;
+}
+
+#results {
+    margin-top: 20px;
+}
