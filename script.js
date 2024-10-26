@@ -10,14 +10,14 @@ document.getElementById("calculateButton").addEventListener("click", function() 
     // 売上総利益と送料の合計を計算
     const totalWithShipping = grossProfit + shippingFee;
 
-    // 必要な販売価格の計算（手数料込み）
-    const sellingPrice = totalWithShipping / (1 - (feePercentage / 100));
+    // 手数料を含む必要な販売価格の計算
+    const sellingPrice = Math.floor(totalWithShipping / (1 - (feePercentage / 100)));
 
     // 手数料を計算
     const feeAmount = Math.floor(sellingPrice * (feePercentage / 100));
 
     // 必要な販売価格を求める
-    const requiredSellingPrice = Math.floor(sellingPrice + feeAmount);
+    const requiredSellingPrice = sellingPrice + feeAmount;
 
     // 結果を表示
     document.getElementById("sellingPrice").textContent = requiredSellingPrice + " 円";
@@ -26,5 +26,4 @@ document.getElementById("calculateButton").addEventListener("click", function() 
     document.getElementById("grossProfit").textContent = `売上総利益 (卸価格 × 1.3): ${grossProfit} 円`;
     document.getElementById("totalWithShipping").textContent = `売上総利益 ＋ 送料: ${totalWithShipping} 円`;
     document.getElementById("feeAmount").textContent = `手数料: ${feeAmount} 円`;
-    document.getElementById("requiredSellingPrice").textContent = `必要な販売価格: ${requiredSellingPrice} 円`;
 });
