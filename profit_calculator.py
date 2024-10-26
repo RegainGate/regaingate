@@ -1,32 +1,29 @@
-def calculate_price(wholesale_price, fee_percentage, shipping_cost):
-    # 手数料の計算
-    fee_amount = wholesale_price * (fee_percentage / 100)
-    print(f"手数料: {fee_amount:.2f}円")
-    
-    # 送料と手数料を差し引いたベース価格の計算
-    base_price = wholesale_price - fee_amount - shipping_cost
-    print(f"ベース価格 (手数料と送料を引いた後): {base_price:.2f}円")
-    
-    # 30%の利益が出る販売価格の計算
-    if base_price <= 0:
-        print("エラー: ベース価格が0以下です。適切な値を入力してください。")
-        return None
-    
-    target_price = base_price / 0.7  # 利益が30％ということは残りの70％がベース価格となる
-    target_price = int(target_price)  # 小数点以下切り捨て
-    print(f"30％の利益を確保する販売価格: {target_price}円")
-    
-    return target_price
+# profit_calculator.py
 
-# 入力例
-try:
-    wholesale_price = float(input("卸価格を入力してください: "))
-    fee_percentage = float(input("手数料率（％）を入力してください: "))
-    shipping_cost = float(input("送料を入力してください: "))
+import math
 
-    # 計算実行
-    sale_price = calculate_price(wholesale_price, fee_percentage, shipping_cost)
-    if sale_price is not None:
-        print(f"最終販売価格: {sale_price}円")
-except ValueError:
-    print("エラー: 数字を入力してください。")
+# 入力を促す
+print("卸価格を入力してください（例: 1000）：")
+wholesale_price = float(input("卸価格: "))
+
+print("手数料の割合を％で入力してください（例: 5）：")
+fee_percentage = float(input("手数料（％）: "))
+
+print("送料を入力してください（例: 200）：")
+shipping_cost = float(input("送料: "))
+
+# 1. 手数料を計算
+fee_amount = wholesale_price * (fee_percentage / 100)
+print(f"手数料額: {fee_amount}")
+
+# 2. 手数料と送料を引いた後の価格を計算
+net_price = wholesale_price - fee_amount - shipping_cost
+print(f"手数料と送料を引いた後の価格: {net_price}")
+
+# 3. 30%の利益を出すための販売価格を計算
+target_price = net_price / 0.7
+print(f"利益30％の目標価格（小数点以下切り捨て前）: {target_price}")
+
+# 4. 小数点以下を切り捨てる
+final_price = math.floor(target_price)
+print(f"30％の利益が出る販売価格（小数点以下切り捨て後）: {final_price}")
