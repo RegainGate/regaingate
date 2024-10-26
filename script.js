@@ -1,17 +1,27 @@
-function calculateProfitPrice() {
-    const wholesalePrice = parseFloat(document.getElementById('wholesalePrice').value);
-    const feePercentage = parseFloat(document.getElementById('feePercentage').value);
-    const shippingCost = parseFloat(document.getElementById('shippingCost').value);
-
+function calculatePrice() {
+    const wholesalePrice = parseFloat(document.getElementById("wholesalePrice").value);
+    const feePercentage = parseFloat(document.getElementById("feePercentage").value) / 100;
+    const shippingCost = parseFloat(document.getElementById("shippingCost").value);
+    
     if (isNaN(wholesalePrice) || isNaN(feePercentage) || isNaN(shippingCost)) {
-        document.getElementById('result').innerText = 'すべてのフィールドに有効な数値を入力してください。';
+        alert("すべてのフィールドに正しい値を入力してください。");
         return;
     }
 
-    const feeAmount = wholesalePrice * (feePercentage / 100);
-    const totalCosts = feeAmount + shippingCost;
-    const targetPrice = Math.floor((totalCosts / (1 - 0.30)) * 100) / 100; // 30%の利益を得るための価格
+    // 手数料と送料を計算
+    const feeAmount = wholesalePrice * feePercentage;
+    const netAmount = wholesalePrice - feeAmount - shippingCost;
 
-    document.getElementById('result').innerText = `利益価格: ¥${targetPrice}`;
-    document.getElementById('calculations').innerText = `計算: 卸価格 - 手数料(${feeAmount}) - 送料(${shippingCost}) = ¥${targetPrice}`;
+    // 30%の利益を加えた販売金額を計算
+    const sellingPrice = Math.floor(netAmount * 1.3); // 小数点以下切り捨て
+
+    // 結果を表示
+    document.getElementById("result").innerText = `販売金額: ¥${sellingPrice}`;
+    document.getElementById("calculations").innerHTML = `
+        <p>卸価格: ¥${wholesalePrice}</p>
+        <p>手数料: ¥${feeAmount.toFixed(2)}</p>
+        <p>送料: ¥${shippingCost}</p>
+        <p>手数料と送料を引いた金額: ¥${netAmount.toFixed(2)}</p>
+        <p>30%の利益を加えた販売金額: ¥${sellingPrice}</p>
+    `;
 }
