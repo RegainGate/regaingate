@@ -1,50 +1,22 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-}
+document.getElementById("calculateButton").addEventListener("click", function() {
+    // 入力値を取得
+    const wholesalePrice = parseFloat(document.getElementById("wholesalePrice").value);
+    const feePercentage = parseFloat(document.getElementById("feePercentage").value);
+    const shippingCost = parseFloat(document.getElementById("shippingCost").value);
 
-.container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+    // 1. 手数料を計算（小数点以下切り捨て）
+    const feeAmount = Math.floor(wholesalePrice * (feePercentage / 100));
+    document.getElementById("feeAmount").innerText = `手数料額: ${feeAmount}`;
 
-h1 {
-    text-align: center;
-}
+    // 2. 手数料と送料を引いた後の価格を計算（小数点以下切り捨て）
+    const netPrice = Math.floor(wholesalePrice - feeAmount - shippingCost);
+    document.getElementById("netPrice").innerText = `手数料と送料を引いた後の価格: ${netPrice}`;
 
-label {
-    display: block;
-    margin: 10px 0 5px;
-}
+    // 3. 卸価格に対して30%の利益が出る販売価格を計算（小数点以下切り捨て）
+    const targetPrice = Math.floor(wholesalePrice * 1.3);
+    document.getElementById("targetPrice").innerText = `利益30％の目標価格: ${targetPrice}`;
 
-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #218838;
-}
-
-#results {
-    margin-top: 20px;
-}
+    // 4. 小数点以下を切り捨てる
+    const finalPrice = Math.floor(targetPrice);
+    document.getElementById("finalPrice").innerText = `30％の利益が出る販売価格（小数点以下切り捨て後）: ${finalPrice}`;
+});
