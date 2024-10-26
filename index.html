@@ -32,6 +32,13 @@
             <h2>必要な販売価格:</h2>
             <p id="sellingPrice">- 円</p>
         </div>
+
+        <div id="calculations">
+            <h3>途中経過の計算式:</h3>
+            <p id="targetAmount">卸価格の130%: - 円</p>
+            <p id="feeAmount">手数料: - 円</p>
+            <p id="totalAmount">必要な販売価格: - 円</p>
+        </div>
     </div>
 
     <script>
@@ -49,7 +56,13 @@
             // 必要な販売価格の計算
             const requiredSellingPrice = targetAmount + feeAmount + shippingFee;
 
+            // 結果を表示
             document.getElementById("sellingPrice").textContent = requiredSellingPrice.toFixed(2) + " 円";
+
+            // 途中経過を表示
+            document.getElementById("targetAmount").textContent = `卸価格の130%: ${targetAmount.toFixed(2)} 円`;
+            document.getElementById("feeAmount").textContent = `手数料: ${feeAmount.toFixed(2)} 円`;
+            document.getElementById("totalAmount").textContent = `必要な販売価格: ${requiredSellingPrice.toFixed(2)} 円`;
         }
     </script>
 </body>
