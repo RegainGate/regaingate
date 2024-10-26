@@ -10,11 +10,14 @@ document.getElementById("calculateButton").addEventListener("click", function() 
     // 売上総利益と送料の合計を計算
     const totalWithShipping = grossProfit + shippingFee;
 
-    // 手数料を卸価格から計算
-    const feeAmount = Math.floor((feePercentage / 100) * wholesalePrice);
+    // 必要な販売価格の計算（手数料込み）
+    const sellingPrice = totalWithShipping / (1 - (feePercentage / 100));
 
-    // 必要な販売価格の計算
-    const requiredSellingPrice = totalWithShipping + feeAmount;
+    // 手数料を計算
+    const feeAmount = Math.floor(sellingPrice * (feePercentage / 100));
+
+    // 必要な販売価格を求める
+    const requiredSellingPrice = Math.floor(sellingPrice + feeAmount);
 
     // 結果を表示
     document.getElementById("sellingPrice").textContent = requiredSellingPrice + " 円";
