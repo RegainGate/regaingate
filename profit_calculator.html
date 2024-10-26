@@ -1,0 +1,100 @@
+<!-- profit_calculator.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30％利益計算ツール</title>
+    <style>
+        /* スタイル設定 */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        .calculator-container {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .calculator-container input, .calculator-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .result, .intermediate-steps {
+            margin-top: 20px;
+        }
+        .result {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator-container">
+    <h2>30％利益計算ツール</h2>
+    <label for="wholesale-price">卸価格：</label>
+    <input type="number" id="wholesale-price" placeholder="卸価格を入力">
+
+    <label for="fee-percentage">手数料（％）：</label>
+    <input type="number" id="fee-percentage" placeholder="手数料を％で入力">
+
+    <label for="shipping-cost">送料：</label>
+    <input type="number" id="shipping-cost" placeholder="送料を入力">
+
+    <button onclick="calculatePrice()">計算する</button>
+
+    <div class="intermediate-steps">
+        <p id="fee-amount"></p>
+        <p id="net-price"></p>
+        <p id="target-price"></p>
+    </div>
+
+    <div class="result">
+        <p id="final-price"></p>
+    </div>
+</div>
+
+<script>
+    function calculatePrice() {
+        // 入力値を取得
+        const wholesalePrice = parseFloat(document.getElementById('wholesale-price').value);
+        const feePercentage = parseFloat(document.getElementById('fee-percentage').value);
+        const shippingCost = parseFloat(document.getElementById('shipping-cost').value);
+
+        if (isNaN(wholesalePrice) || isNaN(feePercentage) || isNaN(shippingCost)) {
+            alert("全ての入力項目に数値を入力してください");
+            return;
+        }
+
+        // 1. 手数料を計算
+        const feeAmount = wholesalePrice * (feePercentage / 100);
+        document.getElementById('fee-amount').textContent = `手数料額: ${feeAmount.toFixed(2)} 円`;
+
+        // 2. 手数料と送料を引いた後の価格を計算
+        const netPrice = wholesalePrice - feeAmount - shippingCost;
+        document.getElementById('net-price').textContent = `手数料と送料を引いた後の価格: ${netPrice.toFixed(2)} 円`;
+
+        // 3. 30％の利益を出すための販売価格を計算
+        const targetPrice = netPrice / 0.7;
+        document.getElementById('target-price').textContent = `利益30％の目標価格（切り捨て前）: ${targetPrice.toFixed(2)} 円`;
+
+        // 4. 小数点以下を切り捨て
+        const finalPrice = Math.floor(targetPrice);
+        document.getElementById('final-price').textContent = `30％の利益が出る販売価格: ${finalPrice} 円`;
+    }
+</script>
+
+</body>
+</html>
