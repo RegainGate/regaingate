@@ -4,24 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>利益計算ツール</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>利益計算ツール</h1>
-    <div>
-        <label for="sellingPrice">販売価格: </label>
-        <input type="number" id="sellingPrice" placeholder="販売価格を入力">
+    <div class="container">
+        <h1>利益計算ツール</h1>
+        
+        <label for="sellingPrice">販売価格:</label>
+        <input type="number" id="sellingPrice" placeholder="円">
+        
+        <label for="shippingCost">送料:</label>
+        <input type="number" id="shippingCost" placeholder="円">
+        
+        <label for="purchasePrice">仕入れ価格:</label>
+        <input type="number" id="purchasePrice" placeholder="円">
+        
+        <button onclick="calculateProfit()">計算</button>
+        
+        <p>手数料: <span id="fee"></span> 円</p>
+        <p>利益額: <span id="profit"></span> 円</p>
     </div>
-    <div>
-        <label for="shippingCost">送料: </label>
-        <input type="number" id="shippingCost" placeholder="送料を入力">
-    </div>
-    <button onclick="calculateProfit()">計算する</button>
 
-    <h2>計算結果</h2>
-    <p>手数料 (10%): <span id="fee">0</span> 円</p>
-    <p>利益額: <span id="profit">0</span> 円</p>
-
-    <!-- JavaScriptファイルを読み込む -->
     <script src="script.js"></script>
 </body>
 </html>
